@@ -1085,20 +1085,44 @@ details:not([open]) > :not(summary) {
 }
 
 .loading {
-  position: relative;
-  padding-left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  max-width: min(100%, 520px);
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid rgba(13, 118, 109, 0.22);
+  border-radius: 8px;
+  background: var(--accent-subtle);
+  color: var(--accent-strong);
+  font-weight: 750;
+  line-height: 1.55;
 }
 
 .loading::before {
   content: "";
-  position: absolute;
-  left: 0;
-  top: 0.72em;
-  width: 6px;
-  height: 6px;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(13, 118, 109, 0.2);
+  border-top-color: var(--accent);
   border-radius: 999px;
-  background: var(--accent);
-  box-shadow: 10px 0 0 rgba(13, 118, 109, 0.45), 20px 0 0 rgba(13, 118, 109, 0.2);
+  background: transparent;
+  animation: loading-spin 820ms linear infinite;
+}
+
+@keyframes loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading::before {
+    animation: none;
+    border-color: rgba(13, 118, 109, 0.32);
+    border-top-color: rgba(13, 118, 109, 0.32);
+  }
 }
 
 @media (max-width: 920px) {
@@ -1154,6 +1178,11 @@ details:not([open]) > :not(summary) {
   .guidance-link {
     font-size: 0.74rem;
     line-height: 1.4;
+  }
+
+  .mode-tabs {
+    justify-self: center;
+    width: min(100%, 272px);
   }
 
   .step-nav,
