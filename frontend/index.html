@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>プロンプト練習</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">P</div>
+          <div>
+            <p class="eyebrow">15分版</p>
+            <h1>プロンプト練習</h1>
+          </div>
+        </div>
+
+        <div class="mode-tabs" role="tablist" aria-label="演習タイプ">
+          <button class="mode-tab active" id="basicTab" type="button" role="tab">基本演習</button>
+          <button class="mode-tab" id="caseTab" type="button" role="tab">実践演習</button>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="secondary-button compact-button" id="clearHistoryButton" type="button">
+            履歴クリア
+          </button>
+        </div>
+      </header>
+
+      <main class="practice-shell">
+        <section class="exercise-view" id="basicView">
+          <nav class="step-nav" id="basicStepNav" aria-label="基本演習ステップ"></nav>
+
+          <section class="focus-panel">
+            <div class="focus-copy">
+              <p class="eyebrow" id="basicKicker">基本</p>
+              <h2 id="basicTitle">読み込み中...</h2>
+              <p id="basicFocus"></p>
+            </div>
+          </section>
+
+          <ol class="practice-steps" aria-label="基本演習の進め方">
+            <li><span>1</span><strong>AI活用シーンを読む</strong></li>
+            <li><span>2</span><strong>プロンプトを書き実行する</strong></li>
+            <li><span>3</span><strong>改善コメントを元に再度プロンプトを書き実行する</strong></li>
+          </ol>
+
+          <section class="work-panel">
+            <div class="source-block">
+              <p class="eyebrow">AI活用シーン</p>
+              <p class="source-help">この問いをもとに、AIへ送るプロンプトを考えてください。</p>
+              <p class="scenario-question" id="basicPromptScenario"></p>
+              <p class="eyebrow reference-label">参考情報</p>
+              <div class="reference-grid" id="basicReferenceList" hidden></div>
+              <p id="basicSourceText"></p>
+            </div>
+
+            <details class="hint-details">
+              <summary>ヒントを見る</summary>
+              <div class="hint-grid">
+                <div>
+                  <p class="eyebrow">観点</p>
+                  <div class="principle-list" id="basicPrincipleList"></div>
+                </div>
+                <div>
+                  <p class="eyebrow">チェック</p>
+                  <ul id="basicChecklist"></ul>
+                </div>
+                <div>
+                  <p class="eyebrow">よくない例</p>
+                  <p id="basicBadExample"></p>
+                </div>
+                <div>
+                  <p class="eyebrow">直し方</p>
+                  <p id="basicHint"></p>
+                </div>
+              </div>
+            </details>
+
+            <div class="editor-heading">
+              <div>
+                <p class="eyebrow">AIに送る文</p>
+                <h3>AIに送るプロンプト</h3>
+              </div>
+              <button class="secondary-button compact-button" id="useBasicStarterButton" type="button">
+                プロンプト例を入れる
+              </button>
+            </div>
+            <textarea
+              id="basicPromptInput"
+              class="prompt-input"
+              spellcheck="false"
+              aria-label="基本演習のプロンプト"
+              placeholder="ここにAIへ送る文を書きます。必要なら上の参考情報を含めてください。"
+            ></textarea>
+
+            <div class="primary-actions">
+              <button class="secondary-button" id="prevBasicButton" type="button">前へ</button>
+              <button class="primary-button" id="runBasicButton" type="button">このプロンプトで実行</button>
+              <button class="secondary-button" id="nextBasicButton" type="button">次へ</button>
+            </div>
+          </section>
+        </section>
+
+        <section class="exercise-view" id="caseView" hidden>
+          <div class="case-choice-grid" id="caseCards" aria-label="実践ケース"></div>
+
+          <section class="focus-panel case-focus">
+            <div class="focus-copy">
+              <p class="eyebrow">ケーススタディ</p>
+              <h2 id="caseTitle">ケースを選択</h2>
+              <p id="caseFocus"></p>
+            </div>
+          </section>
+
+          <section class="work-panel">
+            <div class="source-block">
+              <p class="eyebrow">AI活用シーン</p>
+              <p class="source-help">この問いをもとに、AIへ送るプロンプトを考えてください。</p>
+              <p class="scenario-question" id="casePromptScenario"></p>
+              <p class="eyebrow reference-label">参考情報</p>
+              <div class="reference-grid" id="caseReferenceList" hidden></div>
+              <p id="caseSourceText"></p>
+            </div>
+
+            <details class="hint-details" open>
+              <summary>プロンプト観点チェックリスト</summary>
+              <ul class="case-checklist" id="caseChecklist"></ul>
+            </details>
+
+            <div class="editor-heading">
+              <div>
+                <p class="eyebrow">AIに送る文</p>
+                <h3>1本のプロンプトにまとめる</h3>
+              </div>
+              <button class="secondary-button compact-button" id="useCaseStarterButton" type="button">
+                プロンプト例を入れる
+              </button>
+            </div>
+            <textarea
+              id="casePromptInput"
+              class="prompt-input"
+              spellcheck="false"
+              aria-label="実践演習のプロンプト"
+              placeholder="ここにAIへ送る文を書きます。必要なら上の参考情報を含めてください。"
+            ></textarea>
+
+            <div class="primary-actions end">
+              <button class="primary-button" id="runCaseButton" type="button">このプロンプトで実行</button>
+            </div>
+          </section>
+        </section>
+
+        <section class="result-section" id="resultSection" aria-live="polite" hidden>
+          <section class="output-panel">
+            <div class="output-heading">
+              <div>
+                <p class="eyebrow">送信後の出力</p>
+                <h3>AIの回答</h3>
+                <p class="output-note">プロンプト欄の内容だけを送信しています。</p>
+              </div>
+              <span class="status-pill" id="statusPill">待機中</span>
+            </div>
+            <div class="chat-output" id="assistantOutput"></div>
+          </section>
+
+          <section class="feedback-panel">
+            <div class="feedback-heading">
+              <div>
+                <p class="eyebrow">次に直すための確認</p>
+                <h3>プロンプト改善コメント</h3>
+              </div>
+              <div class="overall-weather-mark" id="overallWeatherMark" hidden></div>
+            </div>
+            <div class="feedback-grid">
+              <div>
+                <p class="eyebrow">良かった点</p>
+                <p id="bestPoint"></p>
+              </div>
+              <div>
+                <p class="eyebrow">次に直す1点</p>
+                <p id="priorityFix"></p>
+              </div>
+            </div>
+            <div class="feedback-notes">
+              <p class="summary-text" id="scoreSummary"></p>
+              <p class="summary-text strong" id="revisionHint"></p>
+            </div>
+            <div class="basic-focus-feedback" id="basicRubricFeedback" hidden></div>
+          </section>
+
+          <details class="detail-section">
+            <summary>書き出し</summary>
+            <div class="export-actions">
+              <button class="secondary-button" id="copyPromptButton" type="button">プロンプトをコピー</button>
+              <button class="secondary-button" id="exportPdfButton" type="button">PDF版</button>
+              <button class="secondary-button" id="exportTextButton" type="button">テキスト</button>
+              <button class="secondary-button" id="exportJsonButton" type="button">JSON</button>
+              <button class="secondary-button" id="exportCsvButton" type="button">CSV</button>
+            </div>
+          </details>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

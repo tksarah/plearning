@@ -1,0 +1,19 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      PORT: 3000
+      ALLOWED_ORIGIN: ${ALLOWED_ORIGIN:-http://localhost:3000}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+      OPENAI_API_BASE: ${OPENAI_API_BASE:-https://api.openai.com/v1}
+      ENABLE_MODEL_SWITCH: ${ENABLE_MODEL_SWITCH:-false}
+      ALLOWED_MODELS: ${ALLOWED_MODELS:-gpt-4o-mini}
+      USE_MOCK_LLM: ${USE_MOCK_LLM:-true}
+      CHAT_HISTORY_TTL_MINUTES: ${CHAT_HISTORY_TTL_MINUTES:-30}
+      SESSION_HISTORY_VISIBLE_COUNT: ${SESSION_HISTORY_VISIBLE_COUNT:-10}
