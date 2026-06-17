@@ -43,6 +43,8 @@ services:
       - "443:443"
     environment:
       APP_DOMAIN: ${APP_DOMAIN:?Set APP_DOMAIN to your production domain}
+      BASIC_AUTH_USER: ${BASIC_AUTH_USER:?Set BASIC_AUTH_USER}
+      BASIC_AUTH_HASH: ${BASIC_AUTH_HASH:?Set BASIC_AUTH_HASH}
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data

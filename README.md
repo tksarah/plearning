@@ -91,6 +91,14 @@ cp .env.production.example .env.production
 
 `.env.production` の `APP_DOMAIN` と `ALLOWED_ORIGIN` を実際のドメインに合わせて変更してください。例: `APP_DOMAIN=example.com`、`ALLOWED_ORIGIN=https://example.com`。
 
+Production access is protected by Caddy Basic authentication, including `/api/*`.
+Generate a hashed password and set `BASIC_AUTH_USER` and `BASIC_AUTH_HASH` in `.env.production`.
+Do not put a plaintext password in `BASIC_AUTH_HASH`.
+```bash
+docker run --rm -it caddy:2-alpine caddy hash-password
+```
+
+Keep the Node app private behind Caddy in production. Use `docker-compose.prod.yml`, which exposes only Caddy on ports `80` and `443`.
 ```bash
 docker compose --env-file .env.production -f docker-compose.prod.yml up -d --build
 ```
@@ -103,7 +111,8 @@ docker compose --env-file .env.production -f docker-compose.prod.yml up -d --bui
 docker compose config
 docker compose --env-file .env.production.example -f docker-compose.prod.yml config
 curl http://localhost:3000/api/health
-curl https://example.com/api/health
+curl -i https://example.com/api/health
+curl -u student:your-password https://example.com/api/health
 ```
 
 ## API
